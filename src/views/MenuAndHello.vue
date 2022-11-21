@@ -29,6 +29,56 @@
       <button>contact us</button>
     </form>
   </section>
+  <section class="appointment">
+    <div class="choose">
+      <img
+        src="../assets/head1.png"
+        alt="image of head and puzzle"
+        class="head-image"
+      />
+      <h3>Relationship Issues</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+        assumenda autem totam, alias accusamus consectetur.
+      </p>
+      <div class="wrap">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+        <router-link class="go-to-appointment" to="/">Appointment</router-link>
+      </div>
+    </div>
+    <div class="choose">
+      <img
+        src="../assets/head2.png"
+        alt="image of head and heart made of hands"
+        class="head-image"
+      />
+      <h3>Anxiety Disorders</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+        assumenda autem totam, alias accusamus consectetur.
+      </p>
+      <div class="wrap">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+        <router-link class="go-to-appointment" to="/">Appointment</router-link>
+      </div>
+    </div>
+    <div class="choose">
+      <img
+        src="../assets/head3.png"
+        alt="image of head and brain"
+        class="head-image"
+      />
+      <h3>Psychologist Issues</h3>
+      <p>
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+        assumenda autem totam, alias accusamus consectetur.
+      </p>
+      <div class="wrap">
+        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+        <router-link class="go-to-appointment" to="/">Appointment</router-link>
+      </div>
+    </div>
+  </section>
 </template>
 <script>
 export default {
@@ -50,15 +100,20 @@ export default {
 </script>
 <style lang="scss" scoped>
 .menu-container {
-  position: relative;
+  position: fixed;
   margin: 0;
   padding: 0;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 70px;
+  background-color: white;
   .hamburger-icon {
-    width: 100%;
-    padding: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 100%;
+    padding: 20px 0;
 
     .fa-bars {
       font-size: 30px;
@@ -103,8 +158,7 @@ export default {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  height: 700px;
-  padding: 10px;
+  padding: 10px 10px 50px 10px;
   background:
         /* top, transparent black, faked with gradient */ linear-gradient(
       rgba(0, 0, 0, 0.2),
@@ -164,5 +218,52 @@ export default {
   position: relative;
   z-index: -1;
 }
-// transform: translate robisz animacje menu
+.appointment {
+  margin-top: 70px;
+  padding: 10px;
+  .choose {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 15px;
+    margin-bottom: 30px;
+    .head-image {
+      width: 20%;
+    }
+    h3 {
+      font-size: 20px;
+      margin: 30px 0 0 0;
+    }
+    p {
+      line-height: 150%;
+      text-align: center;
+      color: #333;
+    }
+    .wrap {
+      margin-top: 30px;
+
+      .fa-cart-shopping {
+        color: #f56928;
+      }
+      .go-to-appointment {
+        margin-left: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+      }
+    }
+  }
+
+  .choose:nth-child(2) {
+    background-color: #f56928;
+    color: white;
+    p {
+      color: white;
+    }
+    .wrap {
+      .fa-cart-shopping {
+        color: #333;
+      }
+    }
+  }
+}
 </style>

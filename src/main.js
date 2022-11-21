@@ -16,10 +16,11 @@ import {
 /* import specific icons */
 import {
   faBars,
-  faXmark
+  faXmark,
+  faCartShopping,
 } from "@fortawesome/free-solid-svg-icons";
 
 /* add icons to the library */
-library.add(faBars, faXmark);
+library.add(faBars, faXmark, faCartShopping);
 
 createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");
