@@ -3,6 +3,24 @@ import {
 } from "vue";
 import App from "./App.vue";
 
-const app = createApp(App);
+/* import the fontawesome core */
+import {
+  library
+} from "@fortawesome/fontawesome-svg-core";
 
-app.mount("#app");
+/* import font awesome icon component */
+import {
+  FontAwesomeIcon
+} from "@fortawesome/vue-fontawesome";
+
+/* import specific icons */
+import {
+  faBars,
+  faXmark,
+  faCartShopping,
+} from "@fortawesome/free-solid-svg-icons";
+
+/* add icons to the library */
+library.add(faBars, faXmark, faCartShopping);
+
+createApp(App).component("font-awesome-icon", FontAwesomeIcon).mount("#app");
