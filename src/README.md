@@ -1,1 +1,1 @@
-### This is simple website for psychology specialist
+### This is simple website for psychology specialists
