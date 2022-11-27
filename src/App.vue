@@ -1,11 +1,13 @@
 <template>
   <MenuAndHello />
   <AboutUs />
+  <Appointment />
 </template>
 
 <script>
 import MenuAndHello from "./views/MenuAndHello.vue";
 import AboutUs from "./views/AboutUs.vue";
+import Appointment from "./views/Appointment.vue";
 
 export default {
   data() {
@@ -14,10 +16,11 @@ export default {
       components: {
         MenuAndHello,
         AboutUs,
+        Appointment,
       },
     };
   },
-  components: { MenuAndHello, AboutUs },
+  components: { MenuAndHello, AboutUs, Appointment },
 };
 </script>
 
