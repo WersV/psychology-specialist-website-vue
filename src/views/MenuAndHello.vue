@@ -114,6 +114,7 @@ export default {
     align-items: center;
     width: 100%;
     padding: 20px 0;
+    background-color: rgb(223, 223, 223);
 
     .fa-bars {
       font-size: 30px;
@@ -261,7 +262,7 @@ export default {
     }
     .wrap {
       .fa-cart-shopping {
-        color: #333;
+        color: white;
       }
     }
   }

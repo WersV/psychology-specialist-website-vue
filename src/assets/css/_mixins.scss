@@ -1,0 +1,4 @@
+@mixin paragraph($line-height: 150%) {
+  letter-spacing: 1px;
+  line-height: $line-height;
+}
