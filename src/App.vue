@@ -1,9 +1,11 @@
 <template>
   <MenuAndHello />
+  <AboutUs />
 </template>
 
 <script>
 import MenuAndHello from "./views/MenuAndHello.vue";
+import AboutUs from "./views/AboutUs.vue";
 
 export default {
   data() {
@@ -11,10 +13,11 @@ export default {
       name: "App",
       components: {
         MenuAndHello,
+        AboutUs,
       },
     };
   },
-  components: { MenuAndHello },
+  components: { MenuAndHello, AboutUs },
 };
 </script>
 
@@ -30,3 +33,7 @@ body {
   }
 }
 </style>
+
+<!-- https://nicepage.com/website-templates/preview/qualified-psychologist-help-1428794?device=desktop -->
+
+<!-- Mogę później udoskonalić tę apkę i np wpisać nazwy specjalistów które poźniej się wyświetlą -->
