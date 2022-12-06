@@ -2,12 +2,16 @@
   <MenuAndHello />
   <AboutUs />
   <Appointment />
+  <ContactUs />
+  <FooterWeb />
 </template>
 
 <script>
 import MenuAndHello from "./views/MenuAndHello.vue";
 import AboutUs from "./views/AboutUs.vue";
 import Appointment from "./views/Appointment.vue";
+import ContactUs from "./views/ContactUs.vue";
+import FooterWeb from "./views/FooterWeb.vue";
 
 export default {
   data() {
@@ -17,10 +21,12 @@ export default {
         MenuAndHello,
         AboutUs,
         Appointment,
+        ContactUs,
+        FooterWeb,
       },
     };
   },
-  components: { MenuAndHello, AboutUs, Appointment },
+  components: { MenuAndHello, AboutUs, Appointment, ContactUs, FooterWeb },
 };
 </script>
 

@@ -2,15 +2,19 @@
 <template>
   <section class="appointment">
     <header class="appointment-header">
-      <img
-        src="../assets/depression.jpeg"
-        alt="woman sitting on a chair with depression"
-      />
-      <h2>Open for appointments</h2>
-      <strong>123 456 789</strong>
+      <div class="header-wrapper">
+        <img
+          src="../assets/depression.jpeg"
+          alt="woman sitting on a chair with depression"
+        />
+        <h2>Open for appointments</h2>
+        <strong>
+          <font-awesome-icon icon="fa-solid fa-phone" />123 456 789</strong
+        >
+      </div>
     </header>
     <section class="subscription">
-      <img src="" alt="" />
+      <img src="../assets/help.jpeg" alt="" />
       <section class="subscription-plans">
         <ul>
           <li v-for="item in subsPlans" :key="item.id">
@@ -91,4 +95,75 @@ export default {
   },
 };
 </script>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.appointment {
+  .appointment-header {
+    background-color: #f2f2f2;
+    padding: 40px 0;
+    .header-wrapper {
+      margin: 20px;
+      background-color: white;
+      img {
+        width: 100%;
+      }
+      h2 {
+        text-align: center;
+        letter-spacing: 1px;
+      }
+      strong {
+        display: block;
+        text-align: center;
+        font-size: 20px;
+        padding: 30px;
+        letter-spacing: 2px;
+        .fa-phone {
+          color: #f56928;
+          padding-right: 5px;
+        }
+      }
+    }
+  }
+  .subscription {
+    margin: 20px;
+    img {
+      width: 100%;
+    }
+    .subscription-plans {
+      ul {
+        list-style-type: none;
+        color: #f56928;
+        font-weight: bold;
+        font-size: 20px;
+        li {
+          display: flex;
+          align-items: center;
+          flex-wrap: wrap;
+          line-height: 50px;
+          button {
+            background-color: #f56928;
+            border: 0;
+            border-radius: 25px;
+            width: 40px;
+            height: 40px;
+            color: white;
+            font-size: 30px;
+            margin-left: 10px;
+          }
+          ul {
+            margin: 20px 0;
+            padding: 0;
+            color: #333;
+            font-size: 16px;
+            list-style-type: "-";
+            li {
+              display: list-item;
+              padding-left: 10px;
+              line-height: 150%;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+</style>
