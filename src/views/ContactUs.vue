@@ -45,7 +45,7 @@ export default {
 @import "../assets/css/mixins";
 $font-size-basic: 20px;
 .contact-us {
-  padding: 20px;
+  padding: 20px 20px 70px 20px;
   margin-top: 50px;
   background-color: #f2f2f2;
   header {
