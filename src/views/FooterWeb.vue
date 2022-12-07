@@ -16,4 +16,17 @@ export default {
   },
 };
 </script>
-<style lang="scss"></style>
+<style lang="scss">
+.footer-web {
+  background-color: #333;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  span {
+    margin: 20px 0;
+    strong {
+      color: rgb(173, 108, 235);
+    }
+  }
+}
+</style>
