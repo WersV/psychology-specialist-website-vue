@@ -37,9 +37,6 @@ body {
   box-sizing: border-box;
   font-family: arial;
   /* overflow: hidden; */
-  #app.active {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
 }
 </style>
 

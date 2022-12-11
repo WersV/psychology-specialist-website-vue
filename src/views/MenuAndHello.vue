@@ -3,17 +3,21 @@
     <div class="hamburger-icon">
       <font-awesome-icon @click="showNav" icon="fa-solid fa-bars" />
     </div>
-    <nav :class="[{ active: isNavActive }, 'nav-menu']">
-      <div class="nav-close">
-        <font-awesome-icon @click="showNav" icon="fa-solid fa-xmark" />
-      </div>
-      <ul class="nav-list">
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
-      </ul>
-    </nav>
   </menu>
+  <nav :class="[{ active: isNavActive }, 'nav-menu']">
+    <div class="nav-close">
+      <font-awesome-icon @click="showNav" icon="fa-solid fa-xmark" />
+    </div>
+    <ul class="nav-list">
+      <li>Home</li>
+      <li>About</li>
+      <li>Contact</li>
+    </ul>
+  </nav>
+  <div
+    :class="[{ active: isNavActive }, 'div-closing-nav']"
+    @click="showNav"
+  ></div>
   <section :class="[{ inactive: isNavActive }, 'contact-us']">
     <div class="text">
       <h1>Psychology specialist Dr. Sara Dowson</h1>
@@ -108,6 +112,7 @@ export default {
   width: 100%;
   height: 70px;
   background-color: white;
+  z-index: 15;
   .hamburger-icon {
     display: flex;
     justify-content: center;
@@ -120,39 +125,56 @@ export default {
       font-size: 30px;
     }
   }
-  .nav-menu {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 65%;
-    background-color: rgba(0, 0, 0, 0.9);
-    height: 100vh;
-    color: white;
-    transform: translateX(-100%);
-    transition: 0.3s ease-out;
-    .nav-close {
-      position: absolute;
-      right: 20px;
-      top: 20px;
-      font-size: 30px;
-    }
-    .nav-list {
-      list-style-type: none;
-      margin: 0;
-      padding: 0;
-      margin-top: 70px;
-      text-align: center;
-      li {
-        font-weight: bold;
-        margin-bottom: 20px;
-        line-height: 250%;
-        cursor: pointer;
-      }
+}
+
+.nav-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 65%;
+  background-color: rgba(0, 0, 0, 0.9);
+  height: 100vh;
+  color: white;
+  transform: translateX(-100%);
+  transition: 0.3s ease-out;
+  z-index: 20;
+  .nav-close {
+    position: absolute;
+    right: 20px;
+    top: 20px;
+    font-size: 30px;
+  }
+  .nav-list {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    margin-top: 70px;
+    text-align: center;
+    li {
+      font-weight: bold;
+      margin-bottom: 20px;
+      line-height: 250%;
+      cursor: pointer;
     }
   }
-  .nav-menu.active {
-    transform: translateX(0);
-  }
+}
+.nav-menu.active {
+  transform: translateX(0);
+}
+
+.div-closing-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  width: 100%;
+  height: 100vh;
+  transform: translateX(-100%);
+  opacity: 0;
+  z-index: 15;
+}
+.div-closing-nav.active {
+  animation: make-bcg-darker 0.3s forwards;
 }
 
 .contact-us {
@@ -215,10 +237,6 @@ export default {
     }
   }
 }
-.contact-us.inactive {
-  position: relative;
-  z-index: -1;
-}
 .appointment {
   margin-top: 70px;
   padding: 10px;
@@ -265,6 +283,17 @@ export default {
         color: white;
       }
     }
+  }
+}
+@keyframes make-bcg-darker {
+  0% {
+    opacity: 0;
+    transform: translateX(0);
+  }
+  100% {
+    opacity: 1;
+    z-index: 15;
+    transform: translateX(0);
   }
 }
 </style>
