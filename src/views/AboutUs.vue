@@ -1,22 +1,30 @@
 <template>
   <section class="about-us">
     <header class="about-us-hello">
-      <h2>About us</h2>
-      <h3 class="main-heading">Our Clinic Expert Psychologist from New York</h3>
-      <p class="color-p">
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do mod
-        tempor incididunt ut labore et dolore magna aliqua.
-      </p>
-      <h3>Psycholigist Issues</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure fuga
-        cupiditate quaerat ea nostrum dolorem aperiam?
-      </p>
-      <h3>Relationship Issues</h3>
-      <p>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure fuga
-        cupiditate quaerat ea nostrum dolorem aperiam?
-      </p>
+      <div class="about-us-hello-wrapper">
+        <div class="wrapper1">
+          <h2>About us</h2>
+          <h3 class="main-heading">
+            Our Clinic Expert Psychologist from New York
+          </h3>
+          <p class="color-p">
+            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do mod
+            tempor incididunt ut labore et dolore magna aliqua.
+          </p>
+        </div>
+        <div class="wrapper2">
+          <h3>Psycholigist Issues</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure fuga
+            cupiditate quaerat ea nostrum dolorem aperiam?
+          </p>
+          <h3>Relationship Issues</h3>
+          <p>
+            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure fuga
+            cupiditate quaerat ea nostrum dolorem aperiam?
+          </p>
+        </div>
+      </div>
     </header>
     <section class="first-specialist">
       <img src="../assets/section-photo.jpeg" alt="person that holds glasses" />
@@ -95,33 +103,37 @@ export default {
 .about-us {
   .about-us-hello {
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     background-color: #f2f2f2;
-    padding: 20px;
-    padding-bottom: 50px;
-    margin-bottom: 50px;
+    .about-us-hello-wrapper {
+      display: flex;
+      flex-direction: column;
+      padding: 50px 20px;
+      margin-bottom: 50px;
+      max-width: 1280px;
 
-    h2 {
-      text-transform: uppercase;
-      font-size: 18px;
-    }
-    h3 {
-      font-size: 24px;
-    }
-    .main-heading {
-      font-size: 35px;
-      margin: 15px 0 10px 0;
-    }
-    p {
-      @include paragraph(150%);
-      color: #333;
-      margin: 0;
-    }
-    .color-p {
-      @include paragraph(120%);
-      color: #f56928;
-      font-size: 20px;
-      margin: 10px 0 30px 0;
+      h2 {
+        text-transform: uppercase;
+        font-size: 18px;
+      }
+      h3 {
+        font-size: 24px;
+      }
+      .main-heading {
+        font-size: 35px;
+        margin: 15px 0 10px 0;
+      }
+      p {
+        @include paragraph(120%);
+        color: #333;
+        margin: 0;
+      }
+      .color-p {
+        @include paragraph(120%);
+        color: #f56928;
+        font-size: 20px;
+        margin: 10px 0 30px 0;
+      }
     }
   }
   .first-specialist {
@@ -222,6 +234,37 @@ export default {
         width: 100%;
         height: 250px;
         object-fit: cover;
+      }
+    }
+  }
+}
+
+@media (min-width: 551px) {
+  .about-us {
+    .about-us-hello {
+      // width: 551px;
+      .about-us-hello-wrapper {
+        width: 551px;
+      }
+    }
+
+    .first-specialist {
+    }
+  }
+}
+@media (min-width: 761px) {
+  .about-us {
+    .about-us-hello {
+      .about-us-hello-wrapper {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+        width: 100%;
+        padding: 50px 40px 0 40px;
+        .wrapper1,
+        .wrapper2 {
+          flex-basis: 45%;
+        }
       }
     }
   }
