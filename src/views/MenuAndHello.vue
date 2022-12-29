@@ -1,10 +1,17 @@
 <template>
   <menu class="menu-container">
-    <div class="hamburger-icon">
+    <div class="hamburger-icon" v-if="isLowRes">
       <font-awesome-icon @click="showNav" icon="fa-solid fa-bars" />
     </div>
+    <nav class="nav-menu-high-res" v-if="!isLowRes">
+      <ul class="nav-list">
+        <li>Home</li>
+        <li>About</li>
+        <li>Contact</li>
+      </ul>
+    </nav>
   </menu>
-  <nav :class="[{ active: isNavActive }, 'nav-menu']">
+  <nav :class="[{ active: isNavActive }, 'nav-menu']" v-if="isLowRes">
     <div class="nav-close">
       <font-awesome-icon @click="showNav" icon="fa-solid fa-xmark" />
     </div>
@@ -17,6 +24,7 @@
   <div
     :class="[{ active: isNavActive }, 'div-closing-nav']"
     @click="showNav"
+    v-if="isLowRes"
   ></div>
   <section :class="[{ inactive: isNavActive }, 'contact-us']">
     <div class="text">
@@ -34,52 +42,60 @@
     </form>
   </section>
   <section class="appointment">
-    <div class="choose">
-      <img
-        src="../assets/head1.png"
-        alt="image of head and puzzle"
-        class="head-image"
-      />
-      <h3>Relationship Issues</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-        assumenda autem totam, alias accusamus consectetur.
-      </p>
-      <div class="wrap">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-        <router-link class="go-to-appointment" to="/">Appointment</router-link>
+    <div class="appointment-wrapper">
+      <div class="choose">
+        <img
+          src="../assets/head1.png"
+          alt="image of head and puzzle"
+          class="head-image"
+        />
+        <h3>Relationship Issues</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+          assumenda autem totam, alias accusamus consectetur.
+        </p>
+        <div class="wrap">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+          <router-link class="go-to-appointment" to="/"
+            >Appointment</router-link
+          >
+        </div>
       </div>
-    </div>
-    <div class="choose">
-      <img
-        src="../assets/head2.png"
-        alt="image of head and heart made of hands"
-        class="head-image"
-      />
-      <h3>Anxiety Disorders</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-        assumenda autem totam, alias accusamus consectetur.
-      </p>
-      <div class="wrap">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-        <router-link class="go-to-appointment" to="/">Appointment</router-link>
+      <div class="choose">
+        <img
+          src="../assets/head2.png"
+          alt="image of head and heart made of hands"
+          class="head-image"
+        />
+        <h3>Anxiety Disorders</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+          assumenda autem totam, alias accusamus consectetur.
+        </p>
+        <div class="wrap">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+          <router-link class="go-to-appointment" to="/"
+            >Appointment</router-link
+          >
+        </div>
       </div>
-    </div>
-    <div class="choose">
-      <img
-        src="../assets/head3.png"
-        alt="image of head and brain"
-        class="head-image"
-      />
-      <h3>Psychologist Issues</h3>
-      <p>
-        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-        assumenda autem totam, alias accusamus consectetur.
-      </p>
-      <div class="wrap">
-        <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-        <router-link class="go-to-appointment" to="/">Appointment</router-link>
+      <div class="choose">
+        <img
+          src="../assets/head3.png"
+          alt="image of head and brain"
+          class="head-image"
+        />
+        <h3>Psychologist Issues</h3>
+        <p>
+          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
+          assumenda autem totam, alias accusamus consectetur.
+        </p>
+        <div class="wrap">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
+          <router-link class="go-to-appointment" to="/"
+            >Appointment</router-link
+          >
+        </div>
       </div>
     </div>
   </section>
@@ -90,7 +106,14 @@ export default {
     return {
       name: "MenuAndHello",
       isNavActive: false,
+      isLowRes: false,
     };
+  },
+  created() {
+    window.addEventListener("resize", this.handleResize);
+  },
+  unmounted() {
+    window.removeEventListener("resize", this.handleResize);
   },
   methods: {
     showNav() {
@@ -98,6 +121,13 @@ export default {
       document.body.style.overflow = this.isNavActive ? "hidden" : "visible";
       const app = document.querySelector("#app");
       app.classList.toggle("active");
+    },
+    handleResize(e) {
+      if (e.target.innerWidth < 1025 && this.isLowRes !== true) {
+        this.isLowRes = true;
+      } else if (e.target.innerWidth >= 1025 && this.isLowRes !== false) {
+        this.isLowRes = false;
+      }
     },
   },
 };
@@ -110,8 +140,9 @@ export default {
   left: 0;
   top: 0;
   width: 100%;
+  min-width: 280px;
   height: 70px;
-  background-color: white;
+  background-color: rgb(223, 223, 223);
   z-index: 15;
   .hamburger-icon {
     display: flex;
@@ -119,7 +150,6 @@ export default {
     align-items: center;
     width: 100%;
     padding: 20px 0;
-    background-color: rgb(223, 223, 223);
 
     .fa-bars {
       font-size: 30px;
@@ -180,7 +210,8 @@ export default {
 .contact-us {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  align-items: center;
+  min-width: 280px;
   padding: 10px 10px 50px 10px;
   background:
         /* top, transparent black, faked with gradient */ linear-gradient(
@@ -190,15 +221,17 @@ export default {
     /* bottom, image */ url("../assets/main.jpeg");
   background-repeat: no-repeat;
   background-position: 15%;
-  background-size: 250%;
+  background-size: cover;
   color: white;
+  margin-top: 70px;
   .text {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin-top: 50px;
+    max-width: 360px;
     h1 {
       font-size: 35px;
-      margin-top: 100px;
     }
     p {
       font-weight: bold;
@@ -206,6 +239,8 @@ export default {
     }
   }
   form {
+    width: 100%;
+    max-width: 360px;
     input {
       width: 100%;
       height: 55px;
@@ -238,53 +273,149 @@ export default {
   }
 }
 .appointment {
+  display: flex;
+  justify-content: center;
   margin-top: 70px;
   padding: 10px;
-  .choose {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 15px;
-    margin-bottom: 30px;
-    .head-image {
-      width: 20%;
-    }
-    h3 {
-      font-size: 20px;
-      margin: 30px 0 0 0;
-    }
-    p {
-      line-height: 150%;
-      text-align: center;
-      color: #333;
-    }
-    .wrap {
-      margin-top: 30px;
-
-      .fa-cart-shopping {
-        color: #f56928;
+  min-width: 280px;
+  .appointment-wrapper {
+    width: 450px;
+    .choose {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 15px;
+      margin-bottom: 30px;
+      .head-image {
+        width: 20%;
       }
-      .go-to-appointment {
-        margin-left: 5px;
-        text-transform: uppercase;
-        font-weight: bold;
+      h3 {
+        font-size: 20px;
+        margin: 30px 0 0 0;
+      }
+      p {
+        line-height: 150%;
+        text-align: center;
+        color: #333;
+      }
+      .wrap {
+        margin-top: 30px;
+
+        .fa-cart-shopping {
+          color: #f56928;
+        }
+        .go-to-appointment {
+          margin-left: 5px;
+          text-transform: uppercase;
+          font-weight: bold;
+        }
       }
     }
-  }
 
-  .choose:nth-child(2) {
-    background-color: #f56928;
-    color: white;
-    p {
+    .choose:nth-child(2) {
+      background-color: #f56928;
       color: white;
-    }
-    .wrap {
-      .fa-cart-shopping {
+      p {
         color: white;
+      }
+      .wrap {
+        .fa-cart-shopping {
+          color: white;
+        }
       }
     }
   }
 }
+
+@media (min-width: 551px) {
+  .nav-menu {
+    width: 270px;
+  }
+  .contact-us {
+    .text,
+    form {
+      max-width: 450px;
+    }
+
+    .text {
+      h1 {
+        font-size: 45px;
+      }
+      p {
+        font-size: 20px;
+      }
+    }
+  }
+}
+
+@media (min-width: 761px) {
+  .contact-us {
+    padding: 20px 20px 80px 10vw;
+    .text {
+      max-width: 800px;
+      align-self: flex-start;
+      h1 {
+        font-size: 65px;
+      }
+    }
+    form {
+      align-self: flex-start;
+      display: flex;
+      align-items: center;
+      max-width: 600px;
+      button {
+        flex-basis: 50%;
+        margin-left: 5px;
+      }
+    }
+  }
+
+  .appointment {
+    .appointment-wrapper {
+      display: grid;
+      grid-template: 1fr 1fr / 1fr 1fr;
+      width: 700px;
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .menu-container {
+    .nav-menu-high-res {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 40vw;
+      font-size: 20px;
+      color: black;
+      .nav-list {
+        display: flex;
+        list-style-type: none;
+        justify-content: space-evenly;
+        margin: 0;
+        padding: 0;
+        li {
+          flex-basis: 20%;
+          text-align: center;
+        }
+      }
+    }
+  }
+
+  .contact-us {
+    background-position: 15% 25%;
+  }
+
+  .appointment {
+    .appointment-wrapper {
+      grid-template: 1fr/ 1fr 1fr 1fr;
+      column-gap: 20px;
+      width: 1280px;
+    }
+  }
+}
+
 @keyframes make-bcg-darker {
   0% {
     opacity: 0;
