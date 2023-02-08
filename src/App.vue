@@ -1,8 +1,8 @@
 <template>
   <MenuAndHello />
   <AboutUs />
-  <!-- <Appointment />
-  <ContactUs />
+  <Appointment />
+  <!-- <ContactUs />
   <FooterWeb /> -->
 </template>
 

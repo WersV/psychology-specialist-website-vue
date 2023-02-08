@@ -33,7 +33,6 @@
         </ul>
       </section>
     </section>
-    <footer class="appointment-benefits"></footer>
   </section>
 </template>
 <script>
@@ -42,10 +41,22 @@ export default {
     return {
       name: "Appointment",
       subsPlans: [
-        { id: 0, plan: "Plan 1" },
-        { id: 1, plan: "Plan 2" },
-        { id: 2, plan: "Plan 3" },
-        { id: 3, plan: "Plan 4" },
+        {
+          id: 0,
+          plan: "Plan 1 Lorem ipsum dolor sit amet consectetur ",
+        },
+        {
+          id: 1,
+          plan: "Plan 2 Lorem ipsum dolor sit ",
+        },
+        {
+          id: 2,
+          plan: "Plan 3 Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+        },
+        {
+          id: 3,
+          plan: "Plan 4 Lorem ipsum dolor",
+        },
       ],
       planDetails: [
         [
@@ -96,15 +107,22 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../assets/css/mixins";
 .appointment {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin: 0 auto;
   .appointment-header {
     background-color: #f2f2f2;
-    padding: 40px 0;
+    // padding: 40px 0;
+    width: 100%;
     .header-wrapper {
       margin: 20px;
       background-color: white;
       img {
         width: 100%;
+        object-fit: cover;
       }
       h2 {
         text-align: center;
@@ -124,21 +142,39 @@ export default {
     }
   }
   .subscription {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     margin: 20px;
     img {
-      width: 100%;
+      display: block;
+      width: 95%;
+      max-width: 560px;
     }
     .subscription-plans {
+      padding: 0 20px;
+
       ul {
-        list-style-type: none;
-        color: #f56928;
         font-weight: bold;
         font-size: 20px;
+        padding: 0;
+        color: #f56928;
+        list-style-type: none;
         li {
           display: flex;
           align-items: center;
           flex-wrap: wrap;
           line-height: 50px;
+          border-bottom: 1px solid #aaa;
+          padding: 10px 0;
+
+          span {
+            @include paragraph(150%);
+            flex-basis: 60%;
+            flex-grow: 1;
+            font-size: 15px;
+          }
+
           button {
             background-color: #f56928;
             border: 0;
@@ -147,7 +183,7 @@ export default {
             height: 40px;
             color: white;
             font-size: 30px;
-            margin-left: 10px;
+            margin-left: 30px;
           }
           ul {
             margin: 20px 0;
@@ -159,9 +195,98 @@ export default {
               display: list-item;
               padding-left: 10px;
               line-height: 150%;
+              border-bottom: 0;
             }
           }
         }
+      }
+    }
+  }
+}
+
+@media (min-width: 551px) {
+  .appointment {
+    .appointment-header {
+      padding: 50px 0;
+      .header-wrapper {
+        width: 93%;
+        max-width: 560px;
+        margin: 0 auto;
+      }
+    }
+  }
+}
+
+@media (min-width: 761px) {
+  .appointment {
+    .appointment-header {
+      .header-wrapper {
+        display: flex;
+        // width: 100%;
+        max-width: 1280px;
+        height: 300px;
+        margin: 0 30px;
+        img {
+          flex-basis: 30%;
+        }
+        h2 {
+          align-self: center;
+          margin: 0 10px;
+          flex-grow: 2;
+        }
+        strong {
+          align-self: center;
+          padding: 0;
+          margin: 0 10px;
+          flex-grow: 1;
+        }
+      }
+    }
+    .subscription {
+      flex-direction: row;
+      img {
+        align-self: flex-start;
+        width: 45%;
+        height: 800px;
+        object-fit: cover;
+      }
+      .subscription-plans {
+        align-self: flex-start;
+        ul {
+          li {
+            margin: 30px 0;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1025px) {
+  .appointment {
+    // max-width: 1280px;
+    .appointment-header {
+      .header-wrapper {
+        width: 95%;
+        max-width: 1280px;
+        margin: 0 auto;
+        h2 {
+          font-size: 30px;
+        }
+        strong {
+          font-size: 25px;
+        }
+      }
+    }
+    .subscription {
+      width: 95%;
+      max-width: 1280px;
+      img {
+        // width: 50%;
+        max-width: 600px;
+      }
+      .subscription-plans {
+        flex-grow: 1;
       }
     }
   }
