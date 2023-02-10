@@ -2,8 +2,8 @@
   <MenuAndHello />
   <AboutUs />
   <Appointment />
-  <!-- <ContactUs />
-  <FooterWeb /> -->
+  <ContactUs />
+  <!-- <FooterWeb /> -->
 </template>
 
 <script>

@@ -113,4 +113,34 @@ $font-size-basic: 20px;
     }
   }
 }
+
+@media (min-width: 551px) {
+  .contact-us {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    header {
+      width: 500px;
+    }
+
+    footer {
+      width: 500px;
+    }
+  }
+}
+
+@media (min-width: 761px) {
+  .contact-us {
+    flex-direction: row;
+    column-gap: 50px;
+    justify-content: center;
+    header {
+      flex-basis: 500px;
+    }
+
+    footer {
+      flex-basis: 500px;
+    }
+  }
+}
 </style>
