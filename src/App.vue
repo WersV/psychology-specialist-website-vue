@@ -3,7 +3,7 @@
   <AboutUs />
   <Appointment />
   <ContactUs />
-  <!-- <FooterWeb /> -->
+  <FooterWeb />
 </template>
 
 <script>

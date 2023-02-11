@@ -22,8 +22,13 @@ export default {
   color: white;
   padding: 20px;
   text-align: center;
+  p {
+    margin: 50px auto;
+    max-width: 700px;
+  }
   span {
     margin: 20px 0;
+    max-width: 700px;
     strong {
       color: rgb(173, 108, 235);
     }
