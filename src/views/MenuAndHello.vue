@@ -111,6 +111,7 @@ export default {
   },
   created() {
     window.addEventListener("resize", this.handleResize);
+    this.handleResize(window.innerWidth);
   },
   unmounted() {
     window.removeEventListener("resize", this.handleResize);
@@ -123,9 +124,12 @@ export default {
       app.classList.toggle("active");
     },
     handleResize(e) {
-      if (e.target.innerWidth < 1025 && this.isLowRes !== true) {
+      let width = 0;
+      typeof e === "number" ? (width = e) : (width = e.target.innerWidth);
+
+      if (width < 1025 && this.isLowRes !== true) {
         this.isLowRes = true;
-      } else if (e.target.innerWidth >= 1025 && this.isLowRes !== false) {
+      } else if (width >= 1025 && this.isLowRes !== false) {
         this.isLowRes = false;
       }
     },
