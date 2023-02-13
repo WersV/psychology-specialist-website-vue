@@ -10,6 +10,9 @@
         <li>Contact</li>
       </ul>
     </nav>
+    <section class="sent-message-form" v-if="isFormSubmitted">
+      <span>Form successfully sent</span>
+    </section>
   </menu>
   <nav :class="[{ active: isNavActive }, 'nav-menu']" v-if="isLowRes">
     <div class="nav-close">
@@ -26,7 +29,7 @@
     @click="showNav"
     v-if="isLowRes"
   ></div>
-  <section :class="[{ inactive: isNavActive }, 'contact-us']">
+  <section :class="[{ inactive: isNavActive }, 'contact-us-hello']">
     <div class="text">
       <h1>Psychology specialist Dr. Sara Dowson</h1>
       <p>
@@ -35,9 +38,15 @@
         nesciunt consequuntur excepturi reiciendis.
       </p>
     </div>
-    <form action="post">
+    <form @submit.prevent="onSubmit">
       <label for="email"></label>
-      <input id="email" type="email" placeholder="Your email" required />
+      <input
+        id="email"
+        type="email"
+        placeholder="Your email"
+        required
+        v-model="inputValue"
+      />
       <button>contact us</button>
     </form>
   </section>
@@ -107,6 +116,8 @@ export default {
       name: "MenuAndHello",
       isNavActive: false,
       isLowRes: false,
+      isFormSubmitted: false,
+      inputValue: "",
     };
   },
   created() {
@@ -133,6 +144,31 @@ export default {
         this.isLowRes = false;
       }
     },
+    onSubmit() {
+      const key = "61d3c0f0ebf34c1db3beb3f5f8e863bb";
+      const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${key}&email=${this.inputValue}`;
+
+      const sendValidationRequest = async (emailAddress) => {
+        const apiResponse = await fetch(emailAddress);
+        const data = await apiResponse.json();
+        const isValid = data.is_valid_format.value;
+        return isValid;
+      };
+
+      (async () => {
+        let resp = await sendValidationRequest(url);
+        console.log(resp);
+        if (resp) {
+          this.inputValue = "";
+          this.isFormSubmitted = true;
+          setTimeout(() => {
+            this.isFormSubmitted = false;
+          }, 4000);
+        } else {
+          alert("Podaj poprawnego maila");
+        }
+      })();
+    },
   },
 };
 </script>
@@ -157,6 +193,21 @@ export default {
 
     .fa-bars {
       font-size: 30px;
+    }
+  }
+  .sent-message-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 90%;
+    margin: 20px auto;
+    max-width: 300px;
+    height: 50px;
+    border-radius: 5px;
+    background-color: #f56928;
+    span {
+      color: white;
+      font-size: 20px;
     }
   }
 }
@@ -211,7 +262,7 @@ export default {
   animation: make-bcg-darker 0.3s forwards;
 }
 
-.contact-us {
+.contact-us-hello {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -335,7 +386,7 @@ export default {
   .nav-menu {
     width: 270px;
   }
-  .contact-us {
+  .contact-us-hello {
     .text,
     form {
       max-width: 450px;
@@ -353,7 +404,7 @@ export default {
 }
 
 @media (min-width: 761px) {
-  .contact-us {
+  .contact-us-hello {
     padding: 20px 20px 80px 10vw;
     .text {
       max-width: 800px;
@@ -405,9 +456,12 @@ export default {
         }
       }
     }
+    .sent-message-form {
+      margin: 100px auto;
+    }
   }
 
-  .contact-us {
+  .contact-us-hello {
     background-position: 15% 25%;
   }
 

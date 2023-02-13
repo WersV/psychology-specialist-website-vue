@@ -1,9 +1,9 @@
 <template>
   <MenuAndHello />
-  <!-- <AboutUs />
+  <AboutUs />
   <Appointment />
   <ContactUs />
-  <FooterWeb /> -->
+  <FooterWeb />
 </template>
 
 <script>
