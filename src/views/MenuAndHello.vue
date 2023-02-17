@@ -10,7 +10,7 @@
         <li>Contact</li>
       </ul>
     </nav>
-    <section class="sent-message-form" v-if="isFormSubmitted">
+    <section class="sent-message-form" v-if="formSubmit.isFormSubmitted">
       <span>Form successfully sent</span>
     </section>
   </menu>
@@ -39,9 +39,9 @@
       </p>
     </div>
     <form @submit.prevent="onSubmit">
-      <label for="email"></label>
+      <label for="email-hello"></label>
       <input
-        id="email"
+        id="email-hello"
         type="email"
         placeholder="Your email"
         required
@@ -110,13 +110,14 @@
   </section>
 </template>
 <script>
+import { formSubmit } from "../components/GlobalStates.js";
 export default {
   data() {
     return {
       name: "MenuAndHello",
       isNavActive: false,
       isLowRes: false,
-      isFormSubmitted: false,
+      formSubmit,
       inputValue: "",
     };
   },
@@ -157,13 +158,9 @@ export default {
 
       (async () => {
         let resp = await sendValidationRequest(url);
-        console.log(resp);
         if (resp) {
           this.inputValue = "";
-          this.isFormSubmitted = true;
-          setTimeout(() => {
-            this.isFormSubmitted = false;
-          }, 4000);
+          this.formSubmit.changeSubmitStatus();
         } else {
           alert("Podaj poprawnego maila");
         }
