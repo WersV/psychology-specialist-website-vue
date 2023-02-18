@@ -19,8 +19,12 @@
       <span>Contact Us</span>
       <h2>Help form</h2>
       <form>
-        <label for="name">Name</label>
-        <input type="text" id="name" placeholder="Enter your Name" />
+        <label for="email-contact-us">Email</label>
+        <input
+          type="email"
+          id="email-contact-us"
+          placeholder="Enter your email"
+        />
         <label for="message">Message</label>
         <textarea
           name=""
@@ -37,7 +41,36 @@ export default {
   data() {
     return {
       name: "ContactUs",
+      isFormSubmitted: false,
+      inputValue: "",
     };
+  },
+  methods: {
+    onSubmit() {
+      const key = "61d3c0f0ebf34c1db3beb3f5f8e863bb";
+      const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${key}&email=${this.inputValue}`;
+
+      const sendValidationRequest = async (emailAddress) => {
+        const apiResponse = await fetch(emailAddress);
+        const data = await apiResponse.json();
+        const isValid = data.is_valid_format.value;
+        return isValid;
+      };
+
+      (async () => {
+        let resp = await sendValidationRequest(url);
+        console.log(resp);
+        if (resp) {
+          this.inputValue = "";
+          this.isFormSubmitted = true;
+          setTimeout(() => {
+            this.isFormSubmitted = false;
+          }, 4000);
+        } else {
+          alert("Podaj poprawnego maila");
+        }
+      })();
+    },
   },
 };
 </script>
