@@ -18,18 +18,20 @@
     <footer>
       <span>Contact Us</span>
       <h2>Help form</h2>
-      <form>
+      <form @submit.prevent="onSubmit">
         <label for="email-contact-us">Email</label>
         <input
           type="email"
           id="email-contact-us"
           placeholder="Enter your email"
+          v-model="inputValue"
         />
         <label for="message">Message</label>
         <textarea
           name=""
           id="message"
           placeholder="Enter your message"
+          v-model="textAreaValue"
         ></textarea>
         <button type="submit">Send</button>
       </form>
@@ -37,12 +39,15 @@
   </section>
 </template>
 <script>
+import { formSubmit } from "../components/GlobalStates.js";
 export default {
   data() {
     return {
       name: "ContactUs",
       isFormSubmitted: false,
       inputValue: "",
+      textAreaValue: "",
+      formSubmit,
     };
   },
   methods: {
@@ -59,13 +64,10 @@ export default {
 
       (async () => {
         let resp = await sendValidationRequest(url);
-        console.log(resp);
         if (resp) {
+          console.log(this.inputValue, this.textAreaValue);
           this.inputValue = "";
-          this.isFormSubmitted = true;
-          setTimeout(() => {
-            this.isFormSubmitted = false;
-          }, 4000);
+          this.formSubmit.changeSubmitStatus();
         } else {
           alert("Podaj poprawnego maila");
         }
