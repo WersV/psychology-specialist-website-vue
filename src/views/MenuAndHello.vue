@@ -65,9 +65,7 @@
         </p>
         <div class="wrap">
           <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-          <router-link class="go-to-appointment" to="/"
-            >Appointment</router-link
-          >
+          <div class="go-to-appointment" to="/">Appointment</div>
         </div>
       </div>
       <div class="choose">
@@ -83,9 +81,7 @@
         </p>
         <div class="wrap">
           <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-          <router-link class="go-to-appointment" to="/"
-            >Appointment</router-link
-          >
+          <div class="go-to-appointment" to="/">Appointment</div>
         </div>
       </div>
       <div class="choose">
@@ -101,9 +97,7 @@
         </p>
         <div class="wrap">
           <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-          <router-link class="go-to-appointment" to="/"
-            >Appointment</router-link
-          >
+          <div class="go-to-appointment" to="/">Appointment</div>
         </div>
       </div>
     </div>
@@ -146,7 +140,7 @@ export default {
       }
     },
     onSubmit() {
-      const key = "61d3c0f0ebf34c1db3beb3f5f8e863bb";
+      const key = "1a0bf743549b4122839c69f78395e388";
       const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${key}&email=${this.inputValue}`;
 
       const sendValidationRequest = async (emailAddress) => {
@@ -162,7 +156,7 @@ export default {
           this.inputValue = "";
           this.formSubmit.changeSubmitStatus();
         } else {
-          alert("Podaj poprawnego maila");
+          alert("Please provide a correct email address.");
         }
       })();
     },
@@ -357,6 +351,7 @@ export default {
           color: #f56928;
         }
         .go-to-appointment {
+          display: inline-block;
           margin-left: 5px;
           text-transform: uppercase;
           font-weight: bold;
