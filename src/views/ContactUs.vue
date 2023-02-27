@@ -52,7 +52,7 @@ export default {
   },
   methods: {
     onSubmit() {
-      const key = "61d3c0f0ebf34c1db3beb3f5f8e863bb";
+      const key = "1a0bf743549b4122839c69f78395e388";
       const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${key}&email=${this.inputValue}`;
 
       const sendValidationRequest = async (emailAddress) => {
@@ -62,16 +62,21 @@ export default {
         return isValid;
       };
 
-      (async () => {
-        let resp = await sendValidationRequest(url);
-        if (resp) {
-          console.log(this.inputValue, this.textAreaValue);
-          this.inputValue = "";
-          this.formSubmit.changeSubmitStatus();
-        } else {
-          alert("Podaj poprawnego maila");
-        }
-      })();
+      if (this.inputValue !== "" && this.textAreaValue !== "") {
+        (async () => {
+          let resp = await sendValidationRequest(url);
+          if (resp) {
+            console.log(this.inputValue, this.textAreaValue);
+            this.inputValue = "";
+            this.textAreaValue = "";
+            this.formSubmit.changeSubmitStatus();
+          } else {
+            alert("Please provide a correct email address.");
+          }
+        })();
+      } else {
+        alert("The email and message fields cannot be left empty.");
+      }
     },
   },
 };
