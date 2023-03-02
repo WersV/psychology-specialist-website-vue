@@ -1,16 +1,16 @@
 <template>
-  <menu class="menu-container">
+  <menu class="menu-container" ref="home">
     <div class="hamburger-icon" v-if="isLowRes">
       <font-awesome-icon @click="showNav" icon="fa-solid fa-bars" />
     </div>
     <nav class="nav-menu-high-res" v-if="!isLowRes">
       <ul class="nav-list">
-        <li>Home</li>
-        <li>About</li>
-        <li>Contact</li>
+        <li @click="goTo('home')">Home</li>
+        <li @click="goTo('aboutUs')">About</li>
+        <li @click="goTo('contactUs')">Contact</li>
       </ul>
     </nav>
-    <section class="sent-message-form" v-if="formSubmit.isFormSubmitted">
+    <section class="sent-message-form" v-if="globalStates.isFormSubmitted">
       <span>Form successfully sent</span>
     </section>
   </menu>
@@ -19,9 +19,9 @@
       <font-awesome-icon @click="showNav" icon="fa-solid fa-xmark" />
     </div>
     <ul class="nav-list">
-      <li>Home</li>
-      <li>About</li>
-      <li>Contact</li>
+      <li @click="goTo('home')">Home</li>
+      <li @click="goTo('aboutUs')">About</li>
+      <li @click="goTo('contactUs')">Contact</li>
     </ul>
   </nav>
   <div
@@ -104,20 +104,23 @@
   </section>
 </template>
 <script>
-import { formSubmit } from "../components/GlobalStates.js";
+import { globalStates } from "../components/GlobalStates.js";
 export default {
   data() {
     return {
       name: "MenuAndHello",
       isNavActive: false,
       isLowRes: false,
-      formSubmit,
+      globalStates,
       inputValue: "",
     };
   },
   created() {
     window.addEventListener("resize", this.handleResize);
     this.handleResize(window.innerWidth);
+  },
+  mounted() {
+    this.globalStates.addRefToGlobalState(this.$refs.home, "home");
   },
   unmounted() {
     window.removeEventListener("resize", this.handleResize);
@@ -154,11 +157,15 @@ export default {
         let resp = await sendValidationRequest(url);
         if (resp) {
           this.inputValue = "";
-          this.formSubmit.changeSubmitStatus();
+          this.globalStates.changeSubmitStatus();
         } else {
           alert("Please provide a correct email address.");
         }
       })();
+    },
+    goTo(refName) {
+      this.globalStates.scrollToEl(refName);
+      if (this.isLowRes) this.showNav();
     },
   },
 };
@@ -230,7 +237,6 @@ export default {
       font-weight: bold;
       margin-bottom: 20px;
       line-height: 250%;
-      cursor: pointer;
     }
   }
 }
@@ -445,6 +451,7 @@ export default {
         li {
           flex-basis: 20%;
           text-align: center;
+          cursor: pointer;
         }
       }
     }

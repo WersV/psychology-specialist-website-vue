@@ -1,5 +1,5 @@
 <template>
-  <section class="about-us">
+  <section class="about-us" ref="aboutUs">
     <header class="about-us-hello">
       <div class="about-us-hello-wrapper">
         <div class="wrapper1">
@@ -84,6 +84,7 @@
   </section>
 </template>
 <script>
+import { globalStates } from "../components/GlobalStates.js";
 export default {
   data() {
     return {
@@ -94,7 +95,11 @@ export default {
         { id: 2, message: "Best Solutions" },
         { id: 3, message: "24/7 Supports" },
       ],
+      globalStates,
     };
+  },
+  mounted() {
+    this.globalStates.addRefToGlobalState(this.$refs.aboutUs, "aboutUs");
   },
 };
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <section class="contact-us">
+  <section class="contact-us" ref="contactUs">
     <header>
       <span>Help 24/7</span>
       <h2>Our help offer</h2>
@@ -39,7 +39,7 @@
   </section>
 </template>
 <script>
-import { formSubmit } from "../components/GlobalStates.js";
+import { globalStates } from "../components/GlobalStates.js";
 export default {
   data() {
     return {
@@ -47,8 +47,11 @@ export default {
       isFormSubmitted: false,
       inputValue: "",
       textAreaValue: "",
-      formSubmit,
+      globalStates,
     };
+  },
+  mounted() {
+    this.globalStates.addRefToGlobalState(this.$refs.contactUs, "contactUs");
   },
   methods: {
     onSubmit() {
@@ -69,7 +72,7 @@ export default {
             console.log(this.inputValue, this.textAreaValue);
             this.inputValue = "";
             this.textAreaValue = "";
-            this.formSubmit.changeSubmitStatus();
+            this.globalStates.changeSubmitStatus();
           } else {
             alert("Please provide a correct email address.");
           }
