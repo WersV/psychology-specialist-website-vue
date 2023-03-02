@@ -184,6 +184,7 @@ export default {
             color: white;
             font-size: 30px;
             margin-left: 30px;
+            cursor: pointer;
           }
           ul {
             margin: 20px 0;
