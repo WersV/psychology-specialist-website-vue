@@ -5,8 +5,9 @@
     </div>
     <nav class="nav-menu-high-res" v-if="!isLowRes">
       <ul class="nav-list">
-        <li @click="goTo('home')">Home</li>
+        <li class="active" @click="goTo('home')">Home</li>
         <li @click="goTo('aboutUs')">About</li>
+        <li @click="goTo('plans')">Plans</li>
         <li @click="goTo('contactUs')">Contact</li>
       </ul>
     </nav>
@@ -21,6 +22,7 @@
     <ul class="nav-list">
       <li @click="goTo('home')">Home</li>
       <li @click="goTo('aboutUs')">About</li>
+      <li @click="goTo('plans')">Plans</li>
       <li @click="goTo('contactUs')">Contact</li>
     </ul>
   </nav>
@@ -113,6 +115,7 @@ export default {
       isLowRes: false,
       globalStates,
       inputValue: "",
+      isSectionActive: [false, true, false, false],
     };
   },
   created() {
@@ -121,9 +124,10 @@ export default {
   },
   mounted() {
     this.globalStates.addRefToGlobalState(this.$refs.home, "home");
+    window.addEventListener("scroll", this.handleScroll);
   },
-  unmounted() {
-    window.removeEventListener("resize", this.handleResize);
+  beforeUnmount() {
+    window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     showNav() {
@@ -163,9 +167,24 @@ export default {
         }
       })();
     },
+    highlightActiveSection(list, el) {
+      if (el.classList.length === 0) {
+        list.forEach((li) => {
+          if (li.classList.length === 1) {
+            li.classList.remove("active");
+          }
+        });
+      }
+      el.classList.add("active");
+    },
     goTo(refName) {
       this.globalStates.scrollToEl(refName);
       if (this.isLowRes) this.showNav();
+      // console.log(event.target);
+      this.highlightActiveSection(
+        event.target.parentNode.childNodes,
+        event.target
+      );
     },
   },
 };
@@ -451,7 +470,13 @@ export default {
         li {
           flex-basis: 20%;
           text-align: center;
+          padding: 5px;
           cursor: pointer;
+        }
+        li.active {
+          background-color: #f56928;
+          border-radius: 7px;
+          color: white;
         }
       }
     }

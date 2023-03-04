@@ -5,6 +5,7 @@ export const globalStates = reactive({
   isFormSubmitted: false,
   homeRef: null,
   aboutUsRef: null,
+  plansRef: null,
   contactUsRef: null,
   changeSubmitStatus() {
     this.isFormSubmitted = true;
@@ -14,13 +15,16 @@ export const globalStates = reactive({
   },
   addRefToGlobalState(ref, refName) {
     // this.aboutUsRef = compInstance.$refs.aboutUs;
-    console.log(ref, refName);
+    // console.log(ref, refName);
     switch (refName) {
       case "home":
         this.homeRef = ref;
         break;
       case "aboutUs":
         this.aboutUsRef = ref;
+        break;
+      case "plans":
+        this.plansRef = ref;
         break;
       case "contactUs":
         this.contactUsRef = ref;
@@ -35,6 +39,9 @@ export const globalStates = reactive({
         break;
       case "aboutUs":
         currentRef = this.aboutUsRef;
+        break;
+      case "plans":
+        currentRef = this.plansRef;
         break;
       case "contactUs":
         currentRef = this.contactUsRef;

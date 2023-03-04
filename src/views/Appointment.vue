@@ -13,7 +13,7 @@
         >
       </div>
     </header>
-    <section class="subscription">
+    <section class="subscription" ref="plans">
       <img src="../assets/help.jpeg" alt="" />
       <section class="subscription-plans">
         <ul>
@@ -36,6 +36,7 @@
   </section>
 </template>
 <script>
+import { globalStates } from "../components/GlobalStates.js";
 export default {
   data() {
     return {
@@ -97,7 +98,11 @@ export default {
         ],
       ],
       detailsShown: [false, false, false, false],
+      globalStates,
     };
+  },
+  mounted() {
+    this.globalStates.addRefToGlobalState(this.$refs.plans, "plans");
   },
   methods: {
     showDetails(index) {
