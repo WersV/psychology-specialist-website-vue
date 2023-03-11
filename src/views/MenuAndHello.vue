@@ -1,15 +1,17 @@
 <template>
   <menu class="menu-container" ref="home">
     <div class="hamburger-icon" v-if="isLowRes">
-      <font-awesome-icon @click="showNav" icon="fa-solid fa-bars" />
+      <div
+        class="hamburger-icon-container"
+        @click="showNav"
+        @keyup.enter="showNav"
+        tabindex="0"
+      >
+        <font-awesome-icon icon="fa-solid fa-bars" />
+      </div>
     </div>
     <nav class="nav-menu-high-res" v-if="!isLowRes">
-      <ul class="nav-list">
-        <li class="active" @click="goTo('home')">Home</li>
-        <li @click="goTo('aboutUs')">About</li>
-        <li @click="goTo('plans')">Plans</li>
-        <li @click="goTo('contactUs')">Contact</li>
-      </ul>
+      <NavList @liClick="goTo" />
     </nav>
     <section class="sent-message-form" v-if="globalStates.isFormSubmitted">
       <span>Form successfully sent</span>
@@ -19,12 +21,7 @@
     <div class="nav-close">
       <font-awesome-icon @click="showNav" icon="fa-solid fa-xmark" />
     </div>
-    <ul class="nav-list">
-      <li @click="goTo('home')">Home</li>
-      <li @click="goTo('aboutUs')">About</li>
-      <li @click="goTo('plans')">Plans</li>
-      <li @click="goTo('contactUs')">Contact</li>
-    </ul>
+    <NavList @liClick="goTo" />
   </nav>
   <div
     :class="[{ active: isNavActive }, 'div-closing-nav']"
@@ -106,7 +103,9 @@
   </section>
 </template>
 <script>
+import NavList from "../components/NavList.vue";
 import { globalStates } from "../components/GlobalStates.js";
+import _ from "lodash";
 export default {
   data() {
     return {
@@ -115,35 +114,44 @@ export default {
       isLowRes: false,
       globalStates,
       inputValue: "",
-      isSectionActive: [false, true, false, false],
+      isScrollDisabled: false,
     };
   },
-  created() {
-    window.addEventListener("resize", this.handleResize);
-    this.handleResize(window.innerWidth);
+  components: {
+    NavList,
   },
   mounted() {
-    this.globalStates.addRefToGlobalState(this.$refs.home, "home");
-    window.addEventListener("scroll", this.handleScroll);
+    window.addEventListener("resize", this.handleResize);
+    this.handleResize(window.innerWidth);
+    this.globalStates.addRefToGlobalState("home", this.$refs.home);
+    window.addEventListener("scroll", _.throttle(this.handleScroll, 100));
+    // this.globalStates.scrollToEl("home");
   },
   beforeUnmount() {
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     showNav() {
-      this.isNavActive = !this.isNavActive;
-      document.body.style.overflow = this.isNavActive ? "hidden" : "visible";
       const app = document.querySelector("#app");
+
+      this.isNavActive = !this.isNavActive;
+      const overflow = this.isNavActive ? "hidden" : "visible";
+      document.body.style.overflow = overflow;
       app.classList.toggle("active");
     },
     handleResize(e) {
-      let width = 0;
-      typeof e === "number" ? (width = e) : (width = e.target.innerWidth);
+      let width;
 
-      if (width < 1025 && this.isLowRes !== true) {
-        this.isLowRes = true;
-      } else if (width >= 1025 && this.isLowRes !== false) {
-        this.isLowRes = false;
+      if (typeof e === "number") {
+        width = e;
+      } else {
+        width = e.target.innerWidth;
+      }
+
+      const isLowRes = width < 1025;
+
+      if (isLowRes !== this.isLowRes) {
+        this.isLowRes = isLowRes;
       }
     },
     onSubmit() {
@@ -156,35 +164,67 @@ export default {
         const isValid = data.is_valid_format.value;
         return isValid;
       };
-
-      (async () => {
-        let resp = await sendValidationRequest(url);
-        if (resp) {
+      const validateEmail = async () => {
+        const isValid = await sendValidationRequest(url);
+        if (isValid) {
           this.inputValue = "";
           this.globalStates.changeSubmitStatus();
         } else {
           alert("Please provide a correct email address.");
         }
-      })();
-    },
-    highlightActiveSection(list, el) {
-      if (el.classList.length === 0) {
-        list.forEach((li) => {
-          if (li.classList.length === 1) {
-            li.classList.remove("active");
-          }
-        });
-      }
-      el.classList.add("active");
+      };
+
+      validateEmail();
     },
     goTo(refName) {
+      this.isScrollDisabled = true;
       this.globalStates.scrollToEl(refName);
-      if (this.isLowRes) this.showNav();
-      // console.log(event.target);
-      this.highlightActiveSection(
-        event.target.parentNode.childNodes,
-        event.target
-      );
+      if (this.isLowRes) {
+        this.showNav();
+      }
+    },
+    handleScroll() {
+      const { globalStates } = this;
+      const isScrolledToBottom =
+        window.innerHeight + Math.ceil(window.scrollY) >=
+        document.body.offsetHeight;
+      const { SECTIONS, lastSectionActive, currentRefOffset } = globalStates;
+
+      if (
+        window.scrollY === currentRefOffset ||
+        (isScrolledToBottom && !lastSectionActive[3])
+      ) {
+        this.isScrollDisabled = false;
+      }
+      if (this.isScrollDisabled) {
+        return;
+      }
+
+      const currentHeight = window.scrollY;
+      const aboutUsOffset = SECTIONS.aboutUs.ref.offsetTop - 70;
+      const plansOffset = SECTIONS.plans.ref.offsetTop - 70;
+      const contactUsOffset = SECTIONS.contactUs.ref.offsetTop - 70;
+
+      let sectionName = "";
+      if (currentHeight >= 0 && currentHeight < aboutUsOffset) {
+        sectionName = "home";
+      } else if (
+        currentHeight >= aboutUsOffset &&
+        currentHeight < plansOffset
+      ) {
+        sectionName = "aboutUs";
+      } else if (
+        currentHeight >= plansOffset &&
+        currentHeight < contactUsOffset
+      ) {
+        sectionName = isScrolledToBottom ? "contactUs" : "plans";
+      } else if (isScrolledToBottom) {
+        sectionName = "contactUs";
+      }
+
+      if (sectionName) {
+        globalStates.changeClassOnScroll(sectionName);
+      }
     },
   },
 };
@@ -207,9 +247,11 @@ export default {
     align-items: center;
     width: 100%;
     padding: 20px 0;
-
-    .fa-bars {
-      font-size: 30px;
+    .hamburger-icon-container {
+      cursor: pointer;
+      .fa-bars {
+        font-size: 30px;
+      }
     }
   }
   .sent-message-form {
@@ -245,18 +287,7 @@ export default {
     right: 20px;
     top: 20px;
     font-size: 30px;
-  }
-  .nav-list {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    margin-top: 70px;
-    text-align: center;
-    li {
-      font-weight: bold;
-      margin-bottom: 20px;
-      line-height: 250%;
-    }
+    cursor: pointer;
   }
 }
 .nav-menu.active {
@@ -461,24 +492,24 @@ export default {
       width: 40vw;
       font-size: 20px;
       color: black;
-      .nav-list {
-        display: flex;
-        list-style-type: none;
-        justify-content: space-evenly;
-        margin: 0;
-        padding: 0;
-        li {
-          flex-basis: 20%;
-          text-align: center;
-          padding: 5px;
-          cursor: pointer;
-        }
-        li.active {
-          background-color: #f56928;
-          border-radius: 7px;
-          color: white;
-        }
-      }
+      // .nav-list {
+      //   display: flex;
+      //   list-style-type: none;
+      //   justify-content: space-evenly;
+      //   margin: 0;
+      //   padding: 0;
+      //   li {
+      //     flex-basis: 20%;
+      //     text-align: center;
+      //     padding: 5px;
+      //     cursor: pointer;
+      //   }
+      //   li.active {
+      //     background-color: #f56928;
+      //     border-radius: 7px;
+      //     color: white;
+      //   }
+      // }
     }
     .sent-message-form {
       margin: 100px auto;

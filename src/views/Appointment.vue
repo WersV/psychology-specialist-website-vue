@@ -102,7 +102,7 @@ export default {
     };
   },
   mounted() {
-    this.globalStates.addRefToGlobalState(this.$refs.plans, "plans");
+    this.globalStates.addRefToGlobalState("plans", this.$refs.plans);
   },
   methods: {
     showDetails(index) {

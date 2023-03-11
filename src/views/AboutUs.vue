@@ -99,7 +99,7 @@ export default {
     };
   },
   mounted() {
-    this.globalStates.addRefToGlobalState(this.$refs.aboutUs, "aboutUs");
+    this.globalStates.addRefToGlobalState("aboutUs", this.$refs.aboutUs);
   },
 };
 </script>

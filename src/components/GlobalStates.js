@@ -2,54 +2,60 @@ import {
   reactive
 } from "vue";
 export const globalStates = reactive({
-  isFormSubmitted: false,
-  homeRef: null,
-  aboutUsRef: null,
-  plansRef: null,
-  contactUsRef: null,
+  SECTIONS: {
+    home: {
+      ref: null,
+      index: 0,
+    },
+    aboutUs: {
+      ref: null,
+      index: 1,
+    },
+    plans: {
+      ref: null,
+      index: 2,
+    },
+    contactUs: {
+      ref: null,
+      index: 3,
+    },
+  },
+  isSectionActive: [true, false, false, false],
+  lastSectionActive: [false, false, false, false],
+  currentRefOffset: 0,
   changeSubmitStatus() {
     this.isFormSubmitted = true;
-    setTimeout(() => {
-      this.isFormSubmitted = false;
-    }, 4000);
+    setTimeout(() => (this.isFormSubmitted = false), 4000);
   },
-  addRefToGlobalState(ref, refName) {
-    // this.aboutUsRef = compInstance.$refs.aboutUs;
-    // console.log(ref, refName);
-    switch (refName) {
-      case "home":
-        this.homeRef = ref;
-        break;
-      case "aboutUs":
-        this.aboutUsRef = ref;
-        break;
-      case "plans":
-        this.plansRef = ref;
-        break;
-      case "contactUs":
-        this.contactUsRef = ref;
-        break;
+  addRefToGlobalState(refName, ref) {
+    if (refName in this.SECTIONS) {
+      //The in operator alone will return true if a specified key/property is in an object
+      this.SECTIONS[refName].ref = ref;
     }
   },
   scrollToEl(refName) {
-    let currentRef = "";
-    switch (refName) {
-      case "home":
-        currentRef = this.homeRef;
-        break;
-      case "aboutUs":
-        currentRef = this.aboutUsRef;
-        break;
-      case "plans":
-        currentRef = this.plansRef;
-        break;
-      case "contactUs":
-        currentRef = this.contactUsRef;
-        break;
+    const SECTION_OFFSET_ADJUSTMENT = 70;
+
+    this.lastSectionActive = this.isSectionActive;
+    this.isSectionActive = [false, false, false, false];
+    const section = this.SECTIONS[refName];
+    if (refName === "home") {
+      this.currentRefOffset = section.ref.offsetTop;
+    } else {
+      this.currentRefOffset = section.ref.offsetTop - SECTION_OFFSET_ADJUSTMENT;
     }
+    this.isSectionActive[section.index] = true;
     window.scrollTo({
-      top: currentRef.offsetTop - 70,
+      top: this.currentRefOffset,
       behavior: "smooth",
     });
+  },
+  changeClassOnScroll(refName) {
+    this.lastSectionActive = this.isSectionActive;
+    this.isSectionActive = [false, false, false, false];
+    if (refName in this.SECTIONS) {
+      const index = this.SECTIONS[refName].index;
+      this.isSectionActive[index] = true;
+    }
   },
 });
