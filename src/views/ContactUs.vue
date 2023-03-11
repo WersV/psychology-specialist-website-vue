@@ -51,7 +51,7 @@ export default {
     };
   },
   mounted() {
-    this.globalStates.addRefToGlobalState(this.$refs.contactUs, "contactUs");
+    this.globalStates.addRefToGlobalState("contactUs", this.$refs.contactUs);
   },
   methods: {
     onSubmit() {

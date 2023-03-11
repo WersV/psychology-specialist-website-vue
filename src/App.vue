@@ -17,13 +17,6 @@ export default {
   data() {
     return {
       name: "App",
-      components: {
-        MenuAndHello,
-        AboutUs,
-        Appointment,
-        ContactUs,
-        FooterWeb,
-      },
     };
   },
   components: { MenuAndHello, AboutUs, Appointment, ContactUs, FooterWeb },
