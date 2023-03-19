@@ -59,24 +59,29 @@ export default {
       const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${key}&email=${this.inputValue}`;
 
       const sendValidationRequest = async (emailAddress) => {
-        const apiResponse = await fetch(emailAddress);
-        const data = await apiResponse.json();
-        const isValid = data.is_valid_format.value;
-        return isValid;
+        try {
+          const apiResponse = await fetch(emailAddress);
+          const data = await apiResponse.json();
+          const isValid = data.is_valid_format.value;
+          return isValid;
+        } catch (error) {
+          console.error(error);
+          throw new Error(`Failed to validate email: ${error.message}`);
+        }
       };
 
       if (this.inputValue !== "" && this.textAreaValue !== "") {
-        (async () => {
-          let resp = await sendValidationRequest(url);
-          if (resp) {
-            console.log(this.inputValue, this.textAreaValue);
+        const validateEmail = async () => {
+          const isValid = await sendValidationRequest(url);
+          if (isValid) {
             this.inputValue = "";
             this.textAreaValue = "";
             this.globalStates.changeSubmitStatus();
           } else {
             alert("Please provide a correct email address.");
           }
-        })();
+        };
+        validateEmail();
       } else {
         alert("The email and message fields cannot be left empty.");
       }
