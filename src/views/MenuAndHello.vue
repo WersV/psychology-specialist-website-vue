@@ -125,15 +125,14 @@ export default {
     this.handleResize(window.innerWidth);
     this.globalStates.addRefToGlobalState("home", this.$refs.home);
     window.addEventListener("scroll", _.throttle(this.handleScroll, 100));
-    // this.globalStates.scrollToEl("home");
   },
   beforeUnmount() {
+    window.removeEventListener("resize", this.handleResize);
     window.removeEventListener("scroll", this.handleScroll);
   },
   methods: {
     showNav() {
       const app = document.querySelector("#app");
-
       this.isNavActive = !this.isNavActive;
       const overflow = this.isNavActive ? "hidden" : "visible";
       document.body.style.overflow = overflow;
@@ -141,15 +140,12 @@ export default {
     },
     handleResize(e) {
       let width;
-
       if (typeof e === "number") {
         width = e;
       } else {
         width = e.target.innerWidth;
       }
-
       const isLowRes = width < 1025;
-
       if (isLowRes !== this.isLowRes) {
         this.isLowRes = isLowRes;
       }
@@ -159,10 +155,15 @@ export default {
       const url = `https://emailvalidation.abstractapi.com/v1/?api_key=${key}&email=${this.inputValue}`;
 
       const sendValidationRequest = async (emailAddress) => {
-        const apiResponse = await fetch(emailAddress);
-        const data = await apiResponse.json();
-        const isValid = data.is_valid_format.value;
-        return isValid;
+        try {
+          const apiResponse = await fetch(emailAddress);
+          const data = await apiResponse.json();
+          const isValid = data.is_valid_format.value;
+          return isValid;
+        } catch (error) {
+          console.error(error);
+          throw new Error(`Failed to validate email: ${error.message}`);
+        }
       };
       const validateEmail = async () => {
         const isValid = await sendValidationRequest(url);
