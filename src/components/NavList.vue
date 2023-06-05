@@ -52,6 +52,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import "../assets/css/variables";
 .nav-list {
   list-style-type: none;
   margin: 0;
@@ -85,7 +86,7 @@ export default {
       cursor: pointer;
     }
     li.active {
-      background-color: #f56928;
+      background-color: $nav-text;
       border-radius: 7px;
       color: white;
     }

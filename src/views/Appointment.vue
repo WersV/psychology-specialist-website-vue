@@ -44,56 +44,80 @@ export default {
       subsPlans: [
         {
           id: 0,
-          plan: "Plan 1 Lorem ipsum dolor sit amet consectetur ",
+          plan: "Individual Therapy Plan",
         },
         {
           id: 1,
-          plan: "Plan 2 Lorem ipsum dolor sit ",
+          plan: "Couples Counseling Plan",
         },
         {
           id: 2,
-          plan: "Plan 3 Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+          plan: "Family Therapy Plan",
         },
         {
           id: 3,
-          plan: "Plan 4 Lorem ipsum dolor",
+          plan: "Wellness and Resilience Plan",
         },
       ],
       planDetails: [
         [
-          { id: 0, plan: "Mattis nunc sed blandit libero volutpat" },
-          { id: 1, plan: "Tortor at risus viverra adipiscing at in tellus" },
-          { id: 2, plan: "Purus ut faucibus pulvinar elementum" },
-          { id: 3, plan: "Blandit turpis cursus in hac habitasse" },
-        ],
-        [
-          { id: 0, plan: "Interdum velit euismod in pellentesque massa" },
+          { id: 0, plan: "Personalized one-on-one therapy sessions" },
           {
             id: 1,
-            plan: "Diam volutpat commodo sed egestas egestas fringilla",
+            plan: "Tailored treatment to address specific concerns and goals",
           },
-          { id: 2, plan: "Nibh nisl condimentum id venenatis a condimentum" },
+          {
+            id: 2,
+            plan: "Exploration of underlying issues and development of coping strategies",
+          },
           {
             id: 3,
-            plan: "Tristique et egestas quis ipsum suspendisse ultrices gravidae",
+            plan: "Focus on personal growth, resilience, and overall well-being",
           },
         ],
         [
-          { id: 0, plan: "Mattis nunc sed blandit libero volutpat" },
-          { id: 1, plan: "Tortor at risus viverra adipiscing at in tellus" },
-          { id: 2, plan: "Purus ut faucibus pulvinar elementum" },
-          { id: 3, plan: "Blandit turpis cursus in hac habitasse" },
-        ],
-        [
-          { id: 0, plan: "Interdum velit euismod in pellentesque massa" },
+          { id: 0, plan: "Joint therapy sessions for couples" },
           {
             id: 1,
-            plan: "Diam volutpat commodo sed egestas egestas fringilla",
+            plan: "Improving communication and resolving conflicts",
           },
-          { id: 2, plan: "Nibh nisl condimentum id venenatis a condimentum" },
+          { id: 2, plan: "Rebuilding trust and deepening emotional intimacy" },
           {
             id: 3,
-            plan: "Tristique et egestas quis ipsum suspendisse ultrices gravidae",
+            plan: "Addressing relationship challenges and enhancing overall partnership",
+          },
+        ],
+        [
+          {
+            id: 0,
+            plan: "Collaborative therapy sessions for the entire family",
+          },
+          { id: 1, plan: "Resolving conflicts and improving communication" },
+          {
+            id: 2,
+            plan: "Fostering understanding, harmony, and healthy dynamics",
+          },
+          {
+            id: 3,
+            plan: "Addressing family-specific challenges and promoting stronger relationships",
+          },
+        ],
+        [
+          {
+            id: 0,
+            plan: "Focus on overall well-being and resilience-building",
+          },
+          {
+            id: 1,
+            plan: "Personalized strategies to manage stress and improve self-care",
+          },
+          {
+            id: 2,
+            plan: "Cultivating healthy habits and promoting emotional balance",
+          },
+          {
+            id: 3,
+            plan: "Enhancing mental health and achieving a greater sense of wellness",
           },
         ],
       ],
@@ -113,6 +137,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../assets/css/mixins";
+@import "../assets/css/variables";
 .appointment {
   display: flex;
   flex-direction: column;
@@ -140,7 +165,7 @@ export default {
         padding: 30px;
         letter-spacing: 2px;
         .fa-phone {
-          color: #f56928;
+          color: $text-on-white;
           padding-right: 5px;
         }
       }
@@ -163,7 +188,7 @@ export default {
         font-weight: bold;
         font-size: 20px;
         padding: 0;
-        color: #f56928;
+        color: $text-on-white;
         list-style-type: none;
         li {
           display: flex;
@@ -181,7 +206,7 @@ export default {
           }
 
           button {
-            background-color: #f56928;
+            background-color: $text-on-white;
             border: 0;
             border-radius: 25px;
             width: 40px;
@@ -192,11 +217,11 @@ export default {
             cursor: pointer;
           }
           ul {
-            margin: 20px 0;
+            margin: 0 20px;
             padding: 0;
             color: #333;
             font-size: 16px;
-            list-style-type: "-";
+            list-style-type: "•";
             li {
               display: list-item;
               padding-left: 10px;

@@ -29,25 +29,28 @@
     v-if="isLowRes"
   ></div>
   <section :class="[{ inactive: isNavActive }, 'contact-us-hello']">
-    <div class="text">
-      <h1>Psychology specialist Dr. Sara Dowson</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Ad beatae,
-        placeat dolor magnam ipsa eligendi ullam eveniet et vel consectetur
-        nesciunt consequuntur excepturi reiciendis.
-      </p>
+    <div class="contact-us-hello-wrapper">
+      <div class="text">
+        <h1>MindScape Psychology Clinic</h1>
+        <p>
+          Unlock the potential of your mind and embark on a transformative
+          journey of self-discovery with our dedicated team of psychology
+          specialists. We believe that everyone deserves to live a fulfilling
+          and balanced life, and we are here to guide you every step of the way.
+        </p>
+      </div>
+      <form @submit.prevent="onSubmit">
+        <label for="email-hello"></label>
+        <input
+          id="email-hello"
+          type="email"
+          placeholder="Your email"
+          required
+          v-model="inputValue"
+        />
+        <button>contact us</button>
+      </form>
     </div>
-    <form @submit.prevent="onSubmit">
-      <label for="email-hello"></label>
-      <input
-        id="email-hello"
-        type="email"
-        placeholder="Your email"
-        required
-        v-model="inputValue"
-      />
-      <button>contact us</button>
-    </form>
   </section>
   <section class="appointment">
     <div class="appointment-wrapper">
@@ -59,13 +62,12 @@
         />
         <h3>Relationship Issues</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-          assumenda autem totam, alias accusamus consectetur.
+          Unlock the secrets to healthy and fulfilling relationships at
+          MindScape Psychology Clinic
         </p>
-        <div class="wrap">
-          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-          <div class="go-to-appointment" to="/">Appointment</div>
-        </div>
+        <!-- <button class="go-to-appointment">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" /> Appointment
+        </button> -->
       </div>
       <div class="choose">
         <img
@@ -75,13 +77,12 @@
         />
         <h3>Anxiety Disorders</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-          assumenda autem totam, alias accusamus consectetur.
+          Break Free from Anxiety: Discover Lasting Peace at MindScape
+          Psychology Clinic
         </p>
-        <div class="wrap">
-          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-          <div class="go-to-appointment" to="/">Appointment</div>
-        </div>
+        <!-- <button class="go-to-appointment">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" /> Appointment
+        </button> -->
       </div>
       <div class="choose">
         <img
@@ -91,13 +92,12 @@
         />
         <h3>Psychologist Issues</h3>
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Omnis
-          assumenda autem totam, alias accusamus consectetur.
+          Empower Your Mind: Seek Clarity and Solutions with Our Expert
+          Psychologists
         </p>
-        <div class="wrap">
-          <font-awesome-icon icon="fa-solid fa-cart-shopping" />
-          <div class="go-to-appointment" to="/">Appointment</div>
-        </div>
+        <!-- <button class="go-to-appointment">
+          <font-awesome-icon icon="fa-solid fa-cart-shopping" /> Appointment
+        </button> -->
       </div>
     </div>
   </section>
@@ -231,6 +231,7 @@ export default {
 };
 </script>
 <style lang="scss" scoped>
+@import "../assets/css/variables";
 .menu-container {
   position: fixed;
   margin: 0;
@@ -264,7 +265,7 @@ export default {
     max-width: 300px;
     height: 50px;
     border-radius: 5px;
-    background-color: #f56928;
+    background-color: $nav-text;
     span {
       color: white;
       font-size: 20px;
@@ -311,11 +312,6 @@ export default {
 }
 
 .contact-us-hello {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  min-width: 280px;
-  padding: 10px 10px 50px 10px;
   background:
         /* top, transparent black, faked with gradient */ linear-gradient(
       rgba(0, 0, 0, 0.2),
@@ -327,51 +323,63 @@ export default {
   background-size: cover;
   color: white;
   margin-top: 70px;
-  .text {
+  .contact-us-hello-wrapper {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    margin-top: 50px;
-    max-width: 360px;
-    h1 {
-      font-size: 35px;
+    align-items: center;
+    min-width: 280px;
+    padding: 10px 10px 50px 10px;
+    .text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin-top: 50px;
+      max-width: 360px;
+      h1 {
+        font-size: 35px;
+        margin-bottom: 0px;
+      }
+      p {
+        font-weight: bold;
+        line-height: 150%;
+      }
     }
-    p {
-      font-weight: bold;
-      line-height: 150%;
-    }
-  }
-  form {
-    width: 100%;
-    max-width: 360px;
-    input {
+    form {
       width: 100%;
-      height: 55px;
-      margin: 20px 0;
-      padding: 10px;
-      font-size: 20px;
-      box-sizing: border-box;
-      border: 0;
-      border-radius: 5px;
-    }
-    input:focus {
-      outline: 2px solid black;
-    }
-    button {
-      width: 100%;
-      height: 55px;
-      padding: 10px;
-      background-color: #f56928;
-      color: white;
-      font-size: 20px;
-      font-weight: bold;
-      letter-spacing: 2px;
-      border: 0;
-      border-radius: 5px;
-      text-transform: uppercase;
-    }
-    button:focus {
-      outline: 2px solid black;
+      max-width: 360px;
+      input {
+        width: 100%;
+        height: 55px;
+        margin: 20px 0;
+        padding: 10px;
+        font-size: 20px;
+        box-sizing: border-box;
+        border: 0;
+        border-radius: 5px;
+      }
+      input:focus {
+        outline: 2px solid black;
+      }
+      button {
+        width: 100%;
+        height: 55px;
+        padding: 10px;
+        background-color: $nav-text;
+        color: white;
+        font-size: 20px;
+        font-weight: bold;
+        letter-spacing: 2px;
+        border: 0;
+        border-radius: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+      }
+      button:hover {
+        background-color: darken($nav-text, 5%);
+      }
+      button:focus {
+        outline: 2px solid black;
+      }
     }
   }
 }
@@ -401,31 +409,33 @@ export default {
         text-align: center;
         color: #333;
       }
-      .wrap {
-        margin-top: 30px;
 
+      .go-to-appointment {
+        margin-top: auto;
+        display: inline-block;
+        background-color: transparent;
+        border: 0;
+        letter-spacing: 0.5px;
+        margin-left: 5px;
+        text-transform: uppercase;
+        font-weight: bold;
+        color: $text-on-white;
+        cursor: pointer;
         .fa-cart-shopping {
-          color: #f56928;
-        }
-        .go-to-appointment {
-          display: inline-block;
-          margin-left: 5px;
-          text-transform: uppercase;
-          font-weight: bold;
+          color: $text-on-white;
         }
       }
     }
 
     .choose:nth-child(2) {
-      background-color: #f56928;
+      background-color: $nav-text;
       color: white;
       p {
         color: white;
       }
-      .wrap {
-        .fa-cart-shopping {
-          color: white;
-        }
+      .fa-cart-shopping,
+      button {
+        color: white;
       }
     }
   }
@@ -436,17 +446,19 @@ export default {
     width: 270px;
   }
   .contact-us-hello {
-    .text,
-    form {
-      max-width: 450px;
-    }
-
-    .text {
-      h1 {
-        font-size: 45px;
+    .contact-us-hello-wrapper {
+      .text,
+      form {
+        max-width: 450px;
       }
-      p {
-        font-size: 20px;
+
+      .text {
+        h1 {
+          font-size: 45px;
+        }
+        p {
+          font-size: 20px;
+        }
       }
     }
   }
@@ -454,22 +466,27 @@ export default {
 
 @media (min-width: 761px) {
   .contact-us-hello {
-    padding: 20px 20px 80px 10vw;
-    .text {
-      max-width: 800px;
-      align-self: flex-start;
-      h1 {
-        font-size: 65px;
+    .contact-us-hello-wrapper {
+      // padding: 20px 20px 80px 10vw;
+      width: 80%;
+      max-width: 1280px;
+      margin: 0 auto;
+      .text {
+        max-width: 800px;
+        align-self: flex-start;
+        h1 {
+          font-size: 65px;
+        }
       }
-    }
-    form {
-      align-self: flex-start;
-      display: flex;
-      align-items: center;
-      max-width: 600px;
-      button {
-        flex-basis: 50%;
-        margin-left: 5px;
+      form {
+        align-self: flex-start;
+        display: flex;
+        align-items: center;
+        max-width: 600px;
+        button {
+          flex-basis: 50%;
+          margin-left: 5px;
+        }
       }
     }
   }
@@ -493,24 +510,6 @@ export default {
       width: 40vw;
       font-size: 20px;
       color: black;
-      // .nav-list {
-      //   display: flex;
-      //   list-style-type: none;
-      //   justify-content: space-evenly;
-      //   margin: 0;
-      //   padding: 0;
-      //   li {
-      //     flex-basis: 20%;
-      //     text-align: center;
-      //     padding: 5px;
-      //     cursor: pointer;
-      //   }
-      //   li.active {
-      //     background-color: #f56928;
-      //     border-radius: 7px;
-      //     color: white;
-      //   }
-      // }
     }
     .sent-message-form {
       margin: 100px auto;

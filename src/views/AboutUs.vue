@@ -4,52 +4,67 @@
       <div class="about-us-hello-wrapper">
         <div class="wrapper1">
           <h2>About us</h2>
-          <h3 class="main-heading">
-            Our Clinic Expert Psychologist from New York
-          </h3>
           <p class="color-p">
-            Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do mod
-            tempor incididunt ut labore et dolore magna aliqua.
+            At MindScape Psychology Clinic, we are committed to providing
+            exceptional care and support to individuals seeking assistance with
+            a wide range of psychological issues. With a compassionate and
+            client-centered approach, our team of dedicated psychologists
+            creates a safe and nurturing environment where personal growth and
+            healing can flourish.
           </p>
         </div>
         <div class="wrapper2">
           <h3>Psycholigist Issues</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure fuga
-            cupiditate quaerat ea nostrum dolorem aperiam?
+            Through evidence-based practices and personalized treatment plans,
+            our experienced psychologists work collaboratively with individuals
+            to identify and address psychological issues, empowering them to
+            overcome challenges and achieve mental well-being.
           </p>
           <h3>Relationship Issues</h3>
           <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Iure fuga
-            cupiditate quaerat ea nostrum dolorem aperiam?
+            Our skilled psychologists provide compassionate and specialized
+            guidance, helping couples and individuals navigate relationship
+            issues, foster effective communication, and cultivate healthier and
+            more fulfilling connections.
           </p>
         </div>
       </div>
     </header>
-    <section class="first-specialist">
-      <img src="../assets/section-photo.jpeg" alt="person that holds glasses" />
-      <div class="first-specialist-content">
-        <img src="../assets/avatar.jpeg" alt="avatar of the specialist" />
-        <p>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Explicabo
-          voluptas, sint enim perferendis dolorum saepe?
-        </p>
-        <strong> Dr. Paul Smith </strong>
-      </div>
-    </section>
-    <section class="pros">
-      <div v-for="item in messagesList" class="pros-element" :key="item.id">
-        <font-awesome-icon icon="fa-solid fa-square-check" />
-        <strong>{{ item.message }}</strong>
+    <section class="specialist-pros">
+      <div class="specialist-pros-container">
+        <section class="first-specialist">
+          <img
+            src="../assets/section-photo.jpeg"
+            alt="person that holds glasses"
+          />
+          <div class="first-specialist-content">
+            <img src="../assets/avatar.jpeg" alt="avatar of the specialist" />
+            <p>
+              Hello and welcome! I am excited to embark on a transformative
+              journey with you, helping you discover your inner strength and
+              resilience while providing guidance and support every step of the
+              way.
+            </p>
+            <strong> Dr. Paul Smith </strong>
+          </div>
+        </section>
+        <section class="pros">
+          <div v-for="item in messagesList" class="pros-element" :key="item.id">
+            <font-awesome-icon icon="fa-solid fa-square-check" />
+            <strong>{{ item.message }}</strong>
+          </div>
+        </section>
       </div>
     </section>
     <section class="second-specialist">
       <header class="second-specialist-header">
-        <p>Psychology Specialist</p>
-        <h3>Dr. Sara Dowson</h3>
+        <h3>Dr. Alexandra Bennett</h3>
         <p>
-          Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci
-          placeat sit dolore dolores suscipit perferendis.
+          Hello! As a specialist in psychology, I extend a heartfelt welcome to
+          you. It is my privilege to join you on this journey of self-discovery,
+          growth, and empowerment. Together, we will navigate the intricacies of
+          the mind, unlocking the doors to a brighter future.
         </p>
       </header>
       <div class="second-specialist-wrapper">
@@ -61,8 +76,9 @@
           <div class="content-right">
             <h4>Our Mission</h4>
             <p>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit.
-              Blanditiis amet itaque, velit obcaecati necessitatibus culpa!
+              Our mission at MindScape Psychology Clinic is to empower
+              individuals, foster personal growth, and promote mental well-being
+              by providing compassionate and evidence-based psychological care.
             </p>
           </div>
         </section>
@@ -71,8 +87,10 @@
           <div class="content-right">
             <h4>Our Vision</h4>
             <p>
-              Sequi doloribus suscipit ut pariatur! Obcaecati fugit in iure,
-              itaque natus quasi labore fuga. Dignissimos?
+              Our vision at MindScape Psychology Clinic is to create a world
+              where individuals have the tools, support, and understanding to
+              overcome psychological challenges, thrive in their lives, and
+              achieve lasting happiness and fulfillment.
             </p>
           </div>
         </section>
@@ -90,10 +108,10 @@ export default {
     return {
       name: "AboutUs",
       messagesList: [
-        { id: 0, message: "Unlimited Revisions" },
-        { id: 1, message: "Good Features" },
-        { id: 2, message: "Best Solutions" },
-        { id: 3, message: "24/7 Supports" },
+        { id: 0, message: "Expertise and Experience" },
+        { id: 1, message: "Personalized Approach" },
+        { id: 2, message: "Holistic Well-being" },
+        { id: 3, message: "Supportive Environment" },
       ],
       globalStates,
     };
@@ -105,114 +123,120 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../assets/css/mixins";
+@import "../assets/css/variables";
 .about-us {
   .about-us-hello {
     display: flex;
     justify-content: center;
-    background-color: #f2f2f2;
+    background-color: $bgc-main;
     .about-us-hello-wrapper {
       display: flex;
       flex-direction: column;
       padding: 50px 20px;
       margin-bottom: 50px;
       max-width: 1280px;
-
       h2 {
         text-transform: uppercase;
-        font-size: 18px;
+        font-size: 36px;
+        margin: 0 0 20px 0;
       }
       h3 {
-        font-size: 24px;
-      }
-      .main-heading {
-        font-size: 35px;
-        margin: 15px 0 10px 0;
+        margin: 0;
+        font-size: 26px;
+        margin: 0 0 10px 0;
       }
       p {
         @include paragraph(120%);
         color: #333;
-        margin: 0;
       }
       .color-p {
         @include paragraph(120%);
-        color: #f56928;
+        color: $text-on-gray;
         font-size: 20px;
         margin: 10px 0 30px 0;
       }
     }
   }
-  .first-specialist {
-    margin: 20px;
-    img {
-      display: block;
-      width: 100%;
-      height: 300px;
-      object-fit: cover;
-    }
-    .first-specialist-content {
-      padding: 30px 10px;
-      background-color: #f2f2f2;
-      img {
-        width: 80px;
-        height: 80px;
-        border-radius: 40px;
+  .specialist-pros {
+    .specialist-pros-container {
+      max-width: 1280px;
+      .first-specialist {
+        margin: 20px;
+        img {
+          display: block;
+          width: 100%;
+          height: 300px;
+          object-fit: cover;
+        }
+        .first-specialist-content {
+          padding: 30px 10px;
+          background-color: $bgc-main;
+          img {
+            width: 80px;
+            height: 80px;
+            border-radius: 40px;
+          }
+          p {
+            @include paragraph(150%);
+            color: #333;
+            margin: 25px 0;
+          }
+          strong {
+            font-size: 20px;
+          }
+        }
       }
-      p {
-        @include paragraph(150%);
-        color: #333;
-        margin: 25px 0;
-      }
-      strong {
-        font-size: 20px;
+      .pros {
+        display: flex;
+        flex-direction: column;
+        margin: 0 10px 100px 10px;
+        .pros-element {
+          width: 100%;
+          display: flex;
+          flex-direction: column;
+          flex-wrap: wrap;
+          margin-bottom: 10px;
+          padding: 20px 0;
+          .fa-square-check {
+            color: $text-on-white;
+            font-size: 100px;
+            margin-bottom: 20px;
+          }
+          strong {
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 1px;
+          }
+        }
+        .pros-element:nth-child(2) {
+          background-color: $bgc-main;
+        }
       }
     }
   }
-  .pros {
-    display: flex;
-    flex-direction: column;
-    margin: 0 10px 100px 10px;
-    .pros-element {
-      width: 100%;
-      display: flex;
-      flex-direction: column;
-      flex-wrap: wrap;
-      margin-bottom: 10px;
-      padding: 20px 0;
-      .fa-square-check {
-        color: #f56928;
-        font-size: 100px;
-        margin-bottom: 20px;
-      }
-      strong {
-        text-align: center;
-        font-size: 20px;
-        letter-spacing: 1px;
-      }
-    }
-    .pros-element:nth-child(2) {
-      background-color: #f2f2f2;
-    }
-  }
+
   .second-specialist {
     display: block;
     flex-direction: column;
+    max-width: 1280px;
     // align-items: center;
     margin: 20px;
     .second-specialist-header {
       p {
         @include paragraph(120%);
         font-size: 20px;
+        margin-top: 0;
         color: #333;
       }
       h3 {
         font-size: 35px;
-        margin: 0px;
+        margin: 0px 0 10px 0;
       }
     }
     .second-specialist-wrapper {
       display: flex;
       flex-direction: column;
-      margin-top: 40px;
+      margin-top: 30px;
       section {
         display: flex;
         margin-bottom: 40px;
@@ -252,21 +276,24 @@ export default {
         width: 551px;
       }
     }
+    .specialist-pros {
+      .specialist-pros-container {
+        .first-specialist {
+          position: relative;
+          width: 510px;
+          height: 560px;
+          margin: 50px auto 80px auto;
 
-    .first-specialist {
-      position: relative;
-      width: 510px;
-      height: 560px;
-      margin: 50px auto 150px auto;
-
-      img {
-        height: 500px;
-        width: 80%;
-      }
-      .first-specialist-content {
-        position: absolute;
-        top: 60%;
-        left: 20%;
+          img {
+            height: 500px;
+            width: 70%;
+          }
+          .first-specialist-content {
+            position: absolute;
+            top: 50%;
+            left: 20%;
+          }
+        }
       }
     }
     .second-specialist {
@@ -291,29 +318,33 @@ export default {
         }
       }
     }
-    .first-specialist {
-      position: relative;
-      width: 650px;
-      height: 560px;
-      margin: 50px auto 150px auto;
+    .specialist-pros {
+      .specialist-pros-container {
+        .first-specialist {
+          position: relative;
+          width: 650px;
+          height: 560px;
+          margin: 50px auto 150px auto;
 
-      img {
-        height: 500px;
-        width: 60%;
-      }
-      .first-specialist-content {
-        position: absolute;
-        top: 60%;
-        left: 40%;
-      }
-    }
+          img {
+            height: 500px;
+            width: 60%;
+          }
+          .first-specialist-content {
+            position: absolute;
+            top: 60%;
+            left: 40%;
+          }
+        }
 
-    .pros {
-      flex-direction: row;
-      flex-wrap: wrap;
-      justify-content: space-around;
-      .pros-element {
-        flex-basis: 45%;
+        .pros {
+          flex-direction: row;
+          flex-wrap: wrap;
+          justify-content: space-around;
+          .pros-element {
+            flex-basis: 45%;
+          }
+        }
       }
     }
     .second-specialist {
@@ -322,13 +353,18 @@ export default {
       column-gap: 50px;
       max-width: 1280px;
       padding: 0 50px;
+      .second-specialist-header {
+        margin-left: 40px;
+      }
       .second-specialist-wrapper {
         grid-column: 1/2;
         grid-row: 2/3;
+        margin-left: 40px;
       }
       footer {
         grid-column: 2/3;
         grid-row: 1/3;
+        margin-right: 40px;
         img {
           height: 600px;
         }
@@ -346,27 +382,56 @@ export default {
 
     .about-us-hello {
       flex-basis: 100%;
-    }
+      .about-us-hello-wrapper {
+        display: flex;
+        justify-content: space-between;
+        padding: 50px 0 0 0;
 
-    .first-specialist {
-      flex-basis: 40%;
-      margin: 50px 0 150px 0;
-      max-width: 640px;
-
-      img {
-        width: 90%;
-      }
-      .first-specialist-content {
-        position: absolute;
-        top: 60%;
-        left: 5%;
+        .wrapper1 {
+          margin-left: 40px;
+        }
+        .wrapper2 {
+          margin-right: 40px;
+        }
       }
     }
-    .pros {
-      flex-basis: 40%;
-      align-self: center;
-      margin: 0 0 0 50px;
-      max-width: 640px;
+    .specialist-pros {
+      display: flex;
+      justify-content: center;
+      flex-basis: 100%;
+      .specialist-pros-container {
+        display: flex;
+        justify-content: space-between;
+        .first-specialist {
+          flex-basis: 40%;
+          margin: 50px 0 200px 40px;
+          max-width: 640px;
+          img {
+            width: 90%;
+          }
+          .first-specialist-content {
+            position: absolute;
+            top: 60%;
+            left: 5%;
+          }
+        }
+        .pros {
+          flex-basis: 40%;
+          align-self: center;
+          margin: 0 40px 0 0px;
+          max-width: 640px;
+
+          .pros-element {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    .second-specialist {
+      flex-basis: 100%;
+      padding: 0;
+      margin: 0;
     }
   }
 }

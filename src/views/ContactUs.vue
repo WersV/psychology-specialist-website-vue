@@ -1,23 +1,23 @@
 <template>
   <section class="contact-us" ref="contactUs">
     <header>
-      <span>Help 24/7</span>
       <h2>Our help offer</h2>
       <p>
-        Lorem, ipsum dolor sit amet consectetur adipisicing elit. Hic nulla
-        porro odio ab, labore commodi eligendi.
+        At our clinic, we provide a compassionate and supportive environment
+        where individuals can find the guidance and tools they need to overcome
+        challenges, discover personal growth, and achieve lasting well-being.
       </p>
       <ul>
+        <li>Personalized therapy for resilience and growth.</li>
+        <li>Evidence-based interventions for mental health and well-being.</li>
         <li>
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis.
+          Strengthen relationships through effective communication and conflict
+          resolution.
         </li>
-        <li>Lorem ipsum dolor sit amet.</li>
-        <li>Lorem ipsum dolor sit amet consectetur adipisicing.</li>
       </ul>
     </header>
     <footer>
-      <span>Contact Us</span>
-      <h2>Help form</h2>
+      <h3>Help form</h3>
       <form @submit.prevent="onSubmit">
         <label for="email-contact-us">Email</label>
         <input
@@ -91,6 +91,7 @@ export default {
 </script>
 <style lang="scss" scoped>
 @import "../assets/css/mixins";
+@import "../assets/css/variables";
 $font-size-basic: 20px;
 .contact-us {
   padding: 20px 20px 70px 20px;
@@ -98,9 +99,6 @@ $font-size-basic: 20px;
   background-color: #f2f2f2;
   header {
     margin-top: 50px;
-    span {
-      font-size: $font-size-basic;
-    }
     h2 {
       font-size: $font-size-basic * 2;
     }
@@ -112,17 +110,13 @@ $font-size-basic: 20px;
       li {
         padding: 5px 0;
         font-size: $font-size-basic;
-        color: #f56928;
+        color: $text-on-gray;
         font-weight: bold;
       }
     }
   }
   footer {
-    span {
-      font-size: $font-size-basic;
-      letter-spacing: 1px;
-    }
-    h2 {
+    h3 {
       font-size: $font-size-basic * 1.4;
       letter-spacing: 1px;
     }
@@ -153,7 +147,7 @@ $font-size-basic: 20px;
         padding: 10px;
         width: 40%;
         align-self: flex-end;
-        background-color: #f56928;
+        background-color: $text-on-white;
         color: white;
         border: 0;
         font-size: 18px;
@@ -183,11 +177,18 @@ $font-size-basic: 20px;
     column-gap: 50px;
     justify-content: center;
     header {
-      flex-basis: 500px;
+      // flex-basis: 500px;
+      margin: 0;
+      h2 {
+        margin: 10px 0;
+      }
     }
 
     footer {
-      flex-basis: 500px;
+      // flex-basis: 500px;
+      h3 {
+        margin: 10px 0;
+      }
     }
   }
 }
