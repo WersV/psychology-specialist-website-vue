@@ -29,10 +29,5 @@ body {
   padding: 0;
   box-sizing: border-box;
   font-family: arial;
-  /* overflow: hidden; */
 }
 </style>
-
-<!-- https://nicepage.com/website-templates/preview/qualified-psychologist-help-1428794?device=desktop -->
-
-<!-- Mogę później udoskonalić tę apkę i np wpisać nazwy specjalistów które poźniej się wyświetlą -->

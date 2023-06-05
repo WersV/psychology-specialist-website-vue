@@ -151,6 +151,7 @@ $font-size-basic: 20px;
         color: white;
         border: 0;
         font-size: 18px;
+        cursor: pointer;
       }
     }
   }
