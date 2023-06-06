@@ -13,6 +13,7 @@ export default defineConfig({
   server: {
     host: true,
   },
+  base: "/psychology-specialist-website-vue/",
   plugins: [vue()],
   resolve: {
     alias: {
